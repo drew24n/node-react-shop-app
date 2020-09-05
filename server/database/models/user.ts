@@ -1,4 +1,5 @@
-import {mongoose} from "../../index";
+const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
 
 const userSchema = mongoose.Schema({
     name: {
@@ -33,6 +34,22 @@ const userSchema = mongoose.Schema({
     }
 })
 
+//encrypt password
+userSchema.pre('save', function (next) {
+    let user = this
+    if (user.isModified('password')) {
+        bcrypt.genSalt(10, function (error, salt) {
+            if (error) return next(error)
+
+            bcrypt.hash(user.password, salt, function (error, hash) {
+                if (error) return next(error)
+                user.password = hash
+                next()
+            })
+        })
+    } else next()
+})
+
 const User = mongoose.model('User', userSchema)
 
-module.exports = {User}
+module.exports = User
