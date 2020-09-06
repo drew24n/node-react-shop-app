@@ -1,16 +1,17 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const userSchema = mongoose.Schema({
     name: {
         type: String,
         minlength: 1,
-        maxlength: 50
+        maxlength: 25
     },
     lastName: {
         type: String,
         minlength: 1,
-        maxlength: 50
+        maxlength: 25
     },
     email: {
         type: String,
@@ -20,7 +21,7 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         minlength: 5,
-        maxlength: 50
+        maxlength: 65
     },
     role: {
         type: Number,
@@ -40,7 +41,6 @@ userSchema.pre('save', function (next) {
     if (user.isModified('password')) {
         bcrypt.genSalt(10, function (error, salt) {
             if (error) return next(error)
-
             bcrypt.hash(user.password, salt, function (error, hash) {
                 if (error) return next(error)
                 user.password = hash
@@ -49,6 +49,24 @@ userSchema.pre('save', function (next) {
         })
     } else next()
 })
+
+//custom method - compare passwords
+userSchema.methods.comparePassword = function (plainPassword, callback) {
+    bcrypt.compare(plainPassword, this.password, function (error, match) {
+        if (error) return callback(error)
+        callback(undefined, match)
+    })
+}
+
+//custom method - generate token
+userSchema.methods.generateToken = function (callback) {
+    let user = this
+    user.token = jwt.sign(user._id.toHexString(), 'secret')
+    user.save((error, user) => {
+        if (error) return callback(error)
+        callback(null, user)
+    })
+}
 
 const User = mongoose.model('User', userSchema)
 

@@ -2,8 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 
-const {login, password, db} = require('./database/auth/dev') //dev connection
-const dbConnection = `mongodb+srv://${login}:${password}@shop.ca8tl.mongodb.net/${db}?retryWrites=true&w=majority`
+const {user, password, db} = require('./database/connection/dev') //dev connection
+const dbConnection = `mongodb+srv://${user}:${password}@shop.ca8tl.mongodb.net/${db}?retryWrites=true&w=majority`
 mongoose.connect(dbConnection, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .then(() => console.log('database connected')).catch(error => console.log(error))
 
@@ -15,8 +15,8 @@ app.listen(PORT, () => console.log(`server is running on port ${PORT}`))
 
 export {app}
 
-//API requests
+//User API
 const register = require('./api/user/register')
-const auth = require('./api/user/auth')
+const login = require('./api/user/login')
 register()
-auth()
+login()
