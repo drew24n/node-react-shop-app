@@ -1,8 +1,7 @@
 import {app} from "../../index";
+import {User} from "../../database/models/user";
 
-const User = require('../../database/models/user')
-
-const register = () => {
+export const register = () => {
     app.post('/api/user/register', async (req, res) => {
         const user = new User(req.body)
         try {
@@ -13,5 +12,3 @@ const register = () => {
         }
     })
 }
-
-module.exports = register

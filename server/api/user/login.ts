@@ -1,8 +1,7 @@
 import {app} from "../../index";
+import {User} from "../../database/models/user";
 
-const User = require('../../database/models/user')
-
-const login = () => {
+export const login = () => {
     app.post('/api/user/login', (req, res) => {
         //find email in database
         User.findOne({email: req.body.email}, (error, user) => {
@@ -19,5 +18,3 @@ const login = () => {
         })
     })
 }
-
-module.exports = login

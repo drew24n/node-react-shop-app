@@ -1,3 +1,7 @@
+import {auth} from "./api/user/auth";
+import {login} from "./api/user/login";
+import {register} from "./api/user/register";
+
 const express = require('express')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
@@ -16,7 +20,6 @@ app.listen(PORT, () => console.log(`server is running on port ${PORT}`))
 export {app}
 
 //User API
-const register = require('./api/user/register')
-const login = require('./api/user/login')
 register()
 login()
+auth()
