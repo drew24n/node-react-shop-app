@@ -1,5 +1,5 @@
 import {app} from "../../index";
-import {authMiddleware} from "../../middleware/auth";
+import {authMiddleware} from "../../middleware/authMiddleware";
 
 export const auth = () => {
     app.get('/api/user/auth', authMiddleware, (req, res) => {
