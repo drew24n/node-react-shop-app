@@ -3,6 +3,6 @@ import style from './WrongUrl.module.scss';
 
 export const WrongUrl = () => {
     return (
-        <div className={style.container}>Error 404. Page not found :(</div>
+        <main className={style.container}>Error 404. Page not found :(</main>
     )
 }

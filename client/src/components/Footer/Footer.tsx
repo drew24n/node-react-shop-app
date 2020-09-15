@@ -3,6 +3,8 @@ import style from './Footer.module.scss';
 
 export const Footer = () => {
     return (
-        <div className={style.container}>Footer</div>
+        <footer className={style.container}>
+            <h4>Copyright © 2020</h4>
+        </footer>
     )
 }

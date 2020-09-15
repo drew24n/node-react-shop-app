@@ -1,1 +1,35 @@
-.container {}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f7f7;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+
+  h2 {
+    margin: 0 15px;
+  }
+
+  div {
+    width: 50%;
+  }
+
+  a {
+    margin: 0 15px;
+  }
+
+  button {
+    margin: 0 15px;
+  }
+
+  div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}

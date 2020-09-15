@@ -3,6 +3,6 @@ import style from './Home.module.scss';
 
 export const Home = () => {
     return (
-        <div className={style.container}>Home</div>
+        <main className={style.container}>Home</main>
     )
 }
