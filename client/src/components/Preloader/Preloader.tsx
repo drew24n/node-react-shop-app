@@ -1,8 +1,10 @@
 import React from "react";
-import style from './Preloader.module.scss';
+import style from "./Preloader.module.scss";
 
-export const Preloader = () => {
+export default function Preloader() {
     return (
-        <div className={style.container}>Preloader</div>
+        <div className={style.container}>
+            <div/>
+        </div>
     )
 }

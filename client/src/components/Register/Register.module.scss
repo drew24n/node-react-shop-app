@@ -2,4 +2,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  div {
+    width: 225px;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  form > button {
+    display: block;
+    margin: auto;
+  }
+
+  form > input {
+    margin-bottom: 25px;
+  }
 }

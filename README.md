@@ -21,5 +21,13 @@ Example json:
 }
 
 (get) /user/auth
+Response example:
+{
+    "isAuth": true,
+    "email": "drew24n@gmail.com",
+    "name": "Andrew",
+    "lastName": "qwerty",
+    "role": 0
+}
 
 (get) /user/logout
