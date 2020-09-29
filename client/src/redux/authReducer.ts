@@ -1,4 +1,4 @@
-import {loginType, registerType, userAPI} from "../api/user";
+import {loginType, registerType, userAPI} from "../api/auth";
 import {notification} from 'antd';
 import {ThunkAction} from 'redux-thunk';
 import {stateType} from "./store";
@@ -49,10 +49,10 @@ const setIsFetching = (isFetching: boolean): setIsFetchingType => ({type: SET_IS
 const setIsInitialized = (isInitialized: boolean): setIsInitializedType => ({type: SET_IS_INITIALIZED, isInitialized})
 
 const notificationError = (message: string) => notification.error({
-    message: message.toString(), duration: 5, placement: 'bottomRight'
+    message: message.toString(), duration: 7, placement: 'bottomRight'
 })
 const notificationSuccess = (message: string) => notification.success({
-    message: message.toString(), duration: 5, placement: 'bottomRight'
+    message: message.toString(), duration: 7, placement: 'bottomRight'
 })
 
 export const register = ({name, lastName, email, password}: registerType): thunkActionType => async (dispatch) => {
@@ -87,13 +87,11 @@ export const login = ({email, password}: loginType): thunkActionType => async (d
     }
 }
 
-export const authMe = (): thunkActionType => async (dispatch) => {
+export const auth = (): thunkActionType => async (dispatch) => {
     try {
         let response = await userAPI.auth()
         if (response.data.isAuth) {
             dispatch(setIsAuthorized(true))
-        } else if (response.data.success === false && response.data.message) {
-            notificationError(response.data.message)
         }
     } catch (e) {
         notificationError(e)
@@ -107,9 +105,6 @@ export const logout = (): thunkActionType => async (dispatch) => {
         dispatch(setIsFetching(true))
         let response = await userAPI.logout()
         if (response.data.success === true) {
-            dispatch(setIsAuthorized(false))
-        } else if (response.data.success === false) {
-            notificationError(response.data.message)
             dispatch(setIsAuthorized(false))
         }
     } catch (e) {

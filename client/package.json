@@ -2,6 +2,7 @@
   "name": "shop",
   "version": "1.0.1",
   "private": true,
+  "homepage": "https://drew24n.github.io/node-react-shop-app/",
   "dependencies": {
     "@types/antd": "^1.0.0",
     "@types/axios": "^0.14.0",

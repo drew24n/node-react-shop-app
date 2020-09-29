@@ -1,7 +1,7 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import {Redirect} from "react-router-dom";
 
-export const withAuthRedirect = (Component) => (props) => {
+export const withAuthRedirect = <T extends object>(Component: ComponentType<T>) => (props: any) => {
     if (!props.isAuthorized) {
         return <Redirect to={"/login"}/>
     } else {

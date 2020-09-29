@@ -13,7 +13,7 @@ export const Header = () => {
     return (
         <header className={style.container}>
             <div>
-                <h2>My site</h2>
+                <h2>Travel</h2>
                 <NavLink activeClassName={style.active} exact to={'/'}>Home</NavLink>
             </div>
             <div>

@@ -5,13 +5,18 @@ import {useDispatch, useSelector} from "react-redux";
 import {login} from "../../redux/authReducer";
 import {Field, reduxForm} from "redux-form";
 import {Redirect} from "react-router-dom";
+import {stateType} from "../../redux/store";
+import {loginType} from "../../api/auth";
+import {InjectedFormProps} from "redux-form/lib/reduxForm";
 
 export const Login = () => {
-    let authState = useSelector(state => state.auth)
+    let authState = useSelector((state: stateType) => state.auth)
     let dispatch = useDispatch()
 
-    let loginFunc = (payload) => {
-        if (payload.email && payload.password) dispatch(login(payload.email, payload.password))
+    let loginFunc = (payload: any) => {
+        if (payload) {
+            dispatch(login({...payload}))
+        }
     }
 
     if (authState.isAuthorized) return <Redirect to={'/'}/>
@@ -26,9 +31,9 @@ export const Login = () => {
     )
 }
 
-const AntInput = (props) => <Input {...props.input} {...props} input={null} meta={null}/>
+const AntInput = (props: any) => <Input {...props.input} {...props} input={null} meta={null}/>
 
-const LoginForm = ({handleSubmit}) => {
+const LoginForm: React.FC<InjectedFormProps<loginType, any> & any> = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
             <Field placeholder={'email'} component={AntInput} name={"email"} type={'email'}/>

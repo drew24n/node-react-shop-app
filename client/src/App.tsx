@@ -6,16 +6,17 @@ import Home from "./components/Home/Home";
 import {Register} from "./components/Register/Register";
 import {Login} from "./components/Login/Login";
 import {WrongUrl} from "./components/WrongUrl/WrongUrl";
-import {authMe} from "./redux/authReducer";
+import {auth} from "./redux/authReducer";
 import {useDispatch, useSelector} from "react-redux";
 import Preloader from "./components/Preloader/Preloader";
+import {stateType} from "./redux/store";
 
 export const App = () => {
-    let authState = useSelector(state => state.auth)
+    let authState = useSelector((state: stateType) => state.auth)
     let dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(authMe())
+        dispatch(auth())
     }, [dispatch])
 
     if (!authState.isInitialized) return <Preloader/>
