@@ -36,8 +36,8 @@ const AntInput = (props: any) => <Input {...props.input} {...props} input={null}
 const LoginForm: React.FC<InjectedFormProps<loginType, any> & any> = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
-            <Field placeholder={'email'} component={AntInput} name={"email"} type={'email'}/>
-            <Field placeholder={'password'} component={AntInput} name={"password"} type={'password'}/>
+            <Field placeholder={'email'} component={AntInput} name={"email"} type={'email'} required/>
+            <Field placeholder={'password'} component={AntInput} name={"password"} type={'password'} required/>
             <Button type="primary" htmlType={'submit'}>Enter</Button>
         </form>
     )

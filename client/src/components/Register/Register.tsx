@@ -32,10 +32,13 @@ const AntInput = (props: any) => <Input {...props.input} {...props} input={null}
 const RegisterForm: FC<InjectedFormProps<registerType, any> & any> = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
-            <Field placeholder={'name'} component={AntInput} name={'name'} type={'text'}/>
-            <Field placeholder={'last name'} component={AntInput} name={'lastName'} type={'text'}/>
-            <Field placeholder={'email'} component={AntInput} name={'email'} type={'email'}/>
-            <Field placeholder={'password'} component={AntInput} name={'password'} type={'password'}/>
+            <Field placeholder={'name'} component={AntInput} name={'name'} type={'text'} required minLength={3}
+                   maxLength={25}/>
+            <Field placeholder={'last name'} component={AntInput} name={'lastName'} type={'text'} required minLength={3}
+                   maxLength={25}/>
+            <Field placeholder={'email'} component={AntInput} name={'email'} type={'email'} required maxLength={35}/>
+            <Field placeholder={'password'} component={AntInput} name={'password'} type={'password'} required
+                   minLength={5} maxLength={65}/>
             <Button type='primary' htmlType={'submit'}>Register</Button>
         </form>
     )

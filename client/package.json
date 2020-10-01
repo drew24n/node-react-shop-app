@@ -1,10 +1,9 @@
 {
   "name": "shop",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "private": true,
   "homepage": "https://drew24n.github.io/node-react-shop-app/",
   "dependencies": {
-    "@types/antd": "^1.0.0",
     "@types/axios": "^0.14.0",
     "@types/node": "^12.12.54",
     "@types/react": "^16.9.49",

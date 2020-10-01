@@ -12,7 +12,9 @@ export const login = () => {
                 //if passwords match - create token
                 user.generateToken((error, user) => {
                     if (error) return res.status(200).send(error)
-                    res.cookie('token', user.token, {sameSite: 'none', secure: true}).status(200).json({success: true, message: 'Logged in'})
+                    res.cookie('token', user.token,
+                        {sameSite: 'none', secure: true}
+                        ).status(200).json({success: true, message: 'Logged in'})
                 })
             })
         })
