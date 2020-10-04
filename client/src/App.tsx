@@ -6,7 +6,7 @@ import Home from "./components/Home/Home";
 import {Register} from "./components/Register/Register";
 import {Login} from "./components/Login/Login";
 import {WrongUrl} from "./components/WrongUrl/WrongUrl";
-import {auth} from "./redux/authReducer";
+import {auth, notificationError} from "./redux/authReducer";
 import {useDispatch, useSelector} from "react-redux";
 import Preloader from "./components/Preloader/Preloader";
 import {stateType} from "./redux/store";
@@ -15,8 +15,13 @@ export const App = () => {
     let authState = useSelector((state: stateType) => state.auth)
     let dispatch = useDispatch()
 
+    let catchAllUnhandledErrors = (reason: PromiseRejectionEvent) => {
+        notificationError(reason.reason.message)
+    }
+
     useEffect(() => {
         dispatch(auth())
+        window.addEventListener("unhandledrejection", catchAllUnhandledErrors)
     }, [dispatch])
 
     if (!authState.isInitialized) return <Preloader/>

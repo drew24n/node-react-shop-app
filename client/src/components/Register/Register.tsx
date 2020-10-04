@@ -11,7 +11,7 @@ export const Register = () => {
     let authState = useSelector((state: stateType) => state.auth)
     let dispatch = useDispatch()
 
-    let registerFunc = (payload: any) => {
+    let registerFunc = (payload: registerType) => {
         if (payload) {
             dispatch(register({...payload}))
         }
@@ -29,7 +29,7 @@ export const Register = () => {
 
 const AntInput = (props: any) => <Input {...props.input} {...props} input={null} meta={null}/>
 
-const RegisterForm: FC<InjectedFormProps<registerType, any> & any> = ({handleSubmit}) => {
+const RegisterForm: FC<InjectedFormProps<registerType>> = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
             <Field placeholder={'name'} component={AntInput} name={'name'} type={'text'} required minLength={3}
@@ -44,4 +44,4 @@ const RegisterForm: FC<InjectedFormProps<registerType, any> & any> = ({handleSub
     )
 }
 
-const LoginReduxForm = reduxForm({form: "register"})(RegisterForm)
+const LoginReduxForm = reduxForm<registerType>({form: "register"})(RegisterForm)

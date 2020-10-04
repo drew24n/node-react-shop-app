@@ -6,31 +6,30 @@ const instance = axios.create({
     withCredentials: true
 })
 
-export type registerType = {
+export interface registerType {
     name: string
     lastName: string
     email: string
     password: string
 }
 
-export type loginType = {
+export interface loginType {
     email: string
     password: string
 }
 
-type basicResponseType = {
+export interface basicResponseType {
     success: boolean
     message: string
 }
 
-type authResponseType = {
-    isAuth: boolean
-    email: string
-    name: string
-    lastName: string
-    role: number
-    success?: boolean
-    message?: string
+interface authResponseType {
+    isAuthorized: boolean
+    id: string | undefined
+    email: string | undefined
+    name: string | undefined
+    lastName: string | undefined
+    role: number | undefined
 }
 
 export const userAPI = {

@@ -9,10 +9,13 @@ export const register = () => {
             if (doc && doc.email === req.body.email) {
                 return res.status(200).json({success: false, message: 'Email is already taken'})
             }
-            const validationError = user.validateSync()
-            if (validationError) return res.status(200).json({success: false, message: validationError.message})
+            let validationError = user.validateSync()
+            if (validationError) return res.status(200).json({
+                success: false,
+                message: validationError.errors[Object.keys(validationError.errors)[0]].message
+            })
             user.save()
-            res.status(200).json({success: true, message: `User is registered`})
+            res.status(200).json({success: true, message: `User ${req.body.name} is registered. You can login now`})
         })
     })
 }

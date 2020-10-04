@@ -13,7 +13,7 @@ export const Login = () => {
     let authState = useSelector((state: stateType) => state.auth)
     let dispatch = useDispatch()
 
-    let loginFunc = (payload: any) => {
+    let loginFunc = (payload: loginType) => {
         if (payload) {
             dispatch(login({...payload}))
         }
@@ -33,7 +33,7 @@ export const Login = () => {
 
 const AntInput = (props: any) => <Input {...props.input} {...props} input={null} meta={null}/>
 
-const LoginForm: React.FC<InjectedFormProps<loginType, any> & any> = ({handleSubmit}) => {
+const LoginForm: React.FC<InjectedFormProps<loginType>> = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
             <Field placeholder={'email'} component={AntInput} name={"email"} type={'email'} required/>
@@ -43,4 +43,4 @@ const LoginForm: React.FC<InjectedFormProps<loginType, any> & any> = ({handleSub
     )
 }
 
-const LoginReduxForm = reduxForm({form: "login"})(LoginForm)
+const LoginReduxForm = reduxForm<loginType>({form: "login"})(LoginForm)
