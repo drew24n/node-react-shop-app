@@ -1,39 +1,45 @@
 .container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 
-  h2 {
-    margin: 0 15px;
+  h1 {
+    font-size: 24px;
+    margin: 0 20px;
+    color: #3498db;
   }
 
-  div {
-    width: 50%;
+  .rightSection {
+    display: flex;
+    align-items: center;
   }
 
-  a {
-    font-weight: 400;
-    font-size: 16px;
-    margin: 0 15px;
-    &.active {
-      color: #ed143d;
+  span {
+    &:nth-child(2), &:nth-child(3) {
+      font-size: 27px;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0;
     }
   }
 
   button {
-    margin: 0 15px;
+    margin: 0 20px;
   }
 
-  div:first-child {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+  @media (max-width: 550px) {
+    .horizontalMenu {
+      display: none;
+    }
+    .logoutBtn {
+      display: none;
+    }
   }
 
-  div:last-child {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  @media (min-width: 550px) {
+    .leftSideNavBtn {
+      display: none;
+    }
   }
 }

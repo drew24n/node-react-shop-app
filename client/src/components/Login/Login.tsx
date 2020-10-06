@@ -19,7 +19,7 @@ export const Login = () => {
         }
     }
 
-    if (authState.isAuthorized) return <Redirect to={'/'}/>
+    if (authState.isAuthorized) return <Redirect to={'/products'}/>
 
     return (
         <main className={style.container}>

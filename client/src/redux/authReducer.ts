@@ -12,11 +12,13 @@ const initialState = {
     isFetching: false,
     isInitialized: false,
     isAuthorized: false,
-    id: '' as string | undefined,
-    email: '' as string | undefined,
-    name: '' as string | undefined,
-    lastName: '' as string | undefined,
-    role: 0 as number | undefined
+    user: {
+        id: '' as string | undefined,
+        email: '' as string | undefined,
+        name: '' as string | undefined,
+        lastName: '' as string | undefined,
+        role: 0 as number | undefined
+    }
 }
 
 export const authReducer = (state = initialState, action: actionsType): typeof initialState => {
@@ -25,11 +27,13 @@ export const authReducer = (state = initialState, action: actionsType): typeof i
             return {
                 ...state,
                 isAuthorized: action.isAuthorized,
-                id: action.id,
-                email: action.email,
-                name: action.name,
-                lastName: action.lastName,
-                role: action.role
+                user: {
+                    id: action.id,
+                    email: action.email,
+                    name: action.name,
+                    lastName: action.lastName,
+                    role: action.role
+                }
             }
         case SET_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
@@ -131,6 +135,7 @@ export const logout = (): thunkActionType => async (dispatch) => {
         let response = await userAPI.logout()
         if (response.data.success === true) {
             dispatch(setAuthData({isAuthorized: false, id: '', email: '', name: '', lastName: '', role: 0}))
+            createHashHistory().push('/login')
         }
     } catch (e) {
         notificationError(e)

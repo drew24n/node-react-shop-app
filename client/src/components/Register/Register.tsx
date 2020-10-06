@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {stateType} from "../../redux/store";
 import {registerType} from "../../api/auth";
+import {Redirect} from "react-router-dom";
 
 export const Register = () => {
     let authState = useSelector((state: stateType) => state.auth)
@@ -16,6 +17,8 @@ export const Register = () => {
             dispatch(register({...payload}))
         }
     }
+
+    if (authState.isAuthorized) return <Redirect to={'/products'}/>
 
     return (
         <main className={style.container}>
