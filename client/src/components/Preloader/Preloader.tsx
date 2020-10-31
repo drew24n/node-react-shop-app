@@ -1,10 +1,13 @@
-import React from "react";
+import React, {memo} from "react";
 import style from "./Preloader.module.scss";
+import {Spin} from "antd";
 
-export default function Preloader() {
+function Preloader() {
     return (
         <div className={style.container}>
-            <div/>
+            <Spin spinning={true} size="large" tip="Starting up server, please wait..."/>
         </div>
     )
 }
+
+export default memo(Preloader)

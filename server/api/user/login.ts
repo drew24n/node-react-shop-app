@@ -1,7 +1,8 @@
-import {app} from "../../../index";
-import {User} from "../../database/models/user";
+import {app} from "../../server";
 
-export const login = () => {
+const {User} = require('../../models/user')
+
+function login () {
     app.post('/api/user/login', (req, res) => {
         //find email in database
         User.findOne({email: req.body.email}, (error, user) => {
@@ -13,10 +14,12 @@ export const login = () => {
                 user.generateToken((error, user) => {
                     if (error) return res.status(200).send(error)
                     res.cookie('token', user.token,
-                        {sameSite: 'none', secure: true}
-                        ).status(200).json({success: true, message: 'Logged in'})
+                        {sameSite: 'none', secure: true, httpOnly: true}
+                    ).status(200).json({success: true, message: 'Logged in'})
                 })
             })
         })
     })
 }
+
+module.exports = login

@@ -41,10 +41,10 @@ const userSchema = mongoose.Schema({
 })
 
 //encrypt password
-userSchema.pre('save', function (next) {
+userSchema.pre('save', async function (next) {
     let user = this
     if (user.isModified('password')) {
-        bcrypt.genSalt(10, function (error, salt) {
+        await bcrypt.genSalt(10, function (error, salt) {
             if (error) return next(error)
             bcrypt.hash(user.password, salt, function (error, hash) {
                 if (error) return next(error)
@@ -56,8 +56,8 @@ userSchema.pre('save', function (next) {
 })
 
 //custom method - compare passwords
-userSchema.methods.comparePassword = function (plainPassword, callback) {
-    bcrypt.compare(plainPassword, this.password, function (error, match) {
+userSchema.methods.comparePassword = async function (plainPassword, callback) {
+    await bcrypt.compare(plainPassword, this.password, function (error, match) {
         if (error) return callback(error)
         callback('', match)
     })
@@ -66,7 +66,7 @@ userSchema.methods.comparePassword = function (plainPassword, callback) {
 //custom method - generate token
 userSchema.methods.generateToken = function (callback) {
     let user = this
-    user.token = jwt.sign(user._id.toString(), 'secret')
+    user.token = jwt.sign(user.id.toString(), 'secret')
     user.save((error, user) => {
         if (error) return callback(error)
         callback('', user)

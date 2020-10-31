@@ -1,12 +1,15 @@
-import {app} from "../../../index";
-import {User} from "../../database/models/user";
-import {authMiddleware} from "../../middleware/authMiddleware";
+import {app} from "../../server";
 
-export const logout = () => {
+const {authMiddleware} = require('../../middleware/authMiddleware')
+const {User} = require('../../models/user')
+
+function logout() {
     app.get('/api/user/logout', authMiddleware, (req, res) => {
-        User.findOneAndUpdate({_id: req.user._id}, {token: ''}, (error, doc) => {
+        User.findOneAndUpdate({id: req.user.id}, {token: ''}, (error, doc) => {
             if (error) return res.status(200).json({success: false, error})
             return res.status(200).send({success: true, message: 'Logged out'})
         })
     })
 }
+
+module.exports = logout

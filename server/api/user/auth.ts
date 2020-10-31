@@ -1,8 +1,9 @@
-import {app} from "../../../index";
-import {authMiddleware} from "../../middleware/authMiddleware";
+import {app} from "../../server";
 
-export const auth = () => {
-    app.get('/api/user/auth', authMiddleware, (req, res) => {
+const {authMiddleware} = require('../../middleware/authMiddleware')
+
+function auth() {
+    return app.get('/api/user/auth', authMiddleware, (req, res) => {
         res.status(200).json({
             isAuthorized: true,
             id: req.user.id,
@@ -13,3 +14,5 @@ export const auth = () => {
         })
     })
 }
+
+module.exports = auth

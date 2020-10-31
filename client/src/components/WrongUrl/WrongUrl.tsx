@@ -1,8 +1,10 @@
-import React from "react";
+import React, {memo} from "react";
 import style from './WrongUrl.module.scss';
 
-export const WrongUrl = () => {
+function WrongUrl() {
     return (
         <main className={style.container}>Page not found :(</main>
     )
 }
+
+export default memo(WrongUrl)

@@ -1,7 +1,8 @@
-import {app} from "../../../index";
-import {User} from "../../database/models/user";
+import {app} from "../../server";
 
-export const register = () => {
+const {User} = require('../../models/user')
+
+function register() {
     app.post('/api/user/register', (req, res) => {
         const user = new User(req.body)
         User.findOne({email: req.body.email}, (error, doc) => {
@@ -19,3 +20,5 @@ export const register = () => {
         })
     })
 }
+
+module.exports = register

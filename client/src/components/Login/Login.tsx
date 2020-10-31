@@ -1,19 +1,14 @@
-import React from "react";
+import React, {memo} from "react";
 import style from './Login.module.scss';
 import {Button, Input, Spin} from "antd";
-import {useDispatch, useSelector} from "react-redux";
 import {login} from "../../redux/authReducer";
 import {Field, reduxForm} from "redux-form";
 import {Redirect} from "react-router-dom";
-import {stateType} from "../../redux/store";
 import {loginType} from "../../api/auth";
 import {InjectedFormProps} from "redux-form/lib/reduxForm";
 
-export const Login = () => {
-    let authState = useSelector((state: stateType) => state.auth)
-    let dispatch = useDispatch()
-
-    let loginFunc = (payload: loginType) => {
+function Login({authState, dispatch}: any) {
+    const loginHandler = (payload: loginType) => {
         if (payload) {
             dispatch(login({...payload}))
         }
@@ -25,7 +20,7 @@ export const Login = () => {
         <main className={style.container}>
             <Spin spinning={authState.isFetching} size="large">
                 <h1>Log in</h1>
-                <LoginReduxForm onSubmit={loginFunc}/>
+                <LoginReduxForm onSubmit={loginHandler}/>
             </Spin>
         </main>
     )
@@ -44,3 +39,5 @@ const LoginForm: React.FC<InjectedFormProps<loginType>> = ({handleSubmit}) => {
 }
 
 const LoginReduxForm = reduxForm<loginType>({form: "login"})(LoginForm)
+
+export default memo(Login)

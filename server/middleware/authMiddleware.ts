@@ -1,6 +1,6 @@
-import {User} from "../database/models/user";
+const {User} = require('../models/user')
 
-export const authMiddleware = (req, res, next) => {
+function authMiddleware(req, res, next) {
     let token = req.cookies.token
     User.findByToken(token, (error, user) => {
         if (error) return error
@@ -10,3 +10,5 @@ export const authMiddleware = (req, res, next) => {
         next()
     })
 }
+
+module.exports = {authMiddleware}

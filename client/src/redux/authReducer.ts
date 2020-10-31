@@ -2,7 +2,7 @@ import {loginType, registerType, userAPI} from "../api/auth";
 import {notification} from 'antd';
 import {ThunkAction} from 'redux-thunk';
 import {stateType} from "./store";
-import {createHashHistory} from 'history';
+import {createBrowserHistory} from 'history';
 
 const SET_AUTH_DATA = "SET_AUTH_DATA"
 const SET_IS_FETCHING = "SET_IS_FETCHING"
@@ -86,10 +86,10 @@ const notificationSuccess = (message: string) => notification.success({
 export const register = ({name, lastName, email, password}: registerType): thunkActionType => async (dispatch) => {
     try {
         dispatch(setIsFetching(true))
-        let response = await userAPI.register({name, lastName, email, password})
+        const response = await userAPI.register({name, lastName, email, password})
         if (response.data.success === true) {
             notificationSuccess(response.data.message)
-            createHashHistory().push('/login')
+            createBrowserHistory().push('/login')
         } else if (response.data.success === false) {
             notificationError(response.data.message)
         }
@@ -103,7 +103,7 @@ export const register = ({name, lastName, email, password}: registerType): thunk
 export const login = ({email, password}: loginType): thunkActionType => async (dispatch) => {
     try {
         dispatch(setIsFetching(true))
-        let response = await userAPI.login({email, password})
+        const response = await userAPI.login({email, password})
         if (response.data.success === true) {
             await dispatch(auth())
         } else if (response.data.success === false) {
@@ -118,7 +118,7 @@ export const login = ({email, password}: loginType): thunkActionType => async (d
 
 export const auth = (): thunkActionType => async (dispatch) => {
     try {
-        let response = await userAPI.auth()
+        const response = await userAPI.auth()
         if (response.data.isAuthorized) {
             dispatch(setAuthData({...response.data}))
         }
@@ -132,10 +132,10 @@ export const auth = (): thunkActionType => async (dispatch) => {
 export const logout = (): thunkActionType => async (dispatch) => {
     try {
         dispatch(setIsFetching(true))
-        let response = await userAPI.logout()
+        const response = await userAPI.logout()
         if (response.data.success === true) {
             dispatch(setAuthData({isAuthorized: false, id: '', email: '', name: '', lastName: '', role: 0}))
-            createHashHistory().push('/login')
+            createBrowserHistory().push('/login')
         }
     } catch (e) {
         notificationError(e)
