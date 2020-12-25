@@ -1,0 +1,12 @@
+/server/node_modules
+/server/uploads/*
+/client/node_modules
+/client/build
+/client/debug.log
+/client/.eslintcache
+
+.idea/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
