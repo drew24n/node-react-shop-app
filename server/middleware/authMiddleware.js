@@ -1,4 +1,4 @@
-const User = require('../models/user')
+const {User} = require('../models/userModel')
 
 function authMiddleware(req, res, next) {
     let token = req.cookies.token
@@ -11,4 +11,4 @@ function authMiddleware(req, res, next) {
     })
 }
 
-module.exports = authMiddleware
+module.exports = {authMiddleware}
