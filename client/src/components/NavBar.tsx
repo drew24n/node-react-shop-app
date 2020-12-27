@@ -1,12 +1,12 @@
-import React, {memo, useEffect, useState} from "react";
-import style from './Header.module.scss';
+import React, {useEffect, useState} from "react";
+import style from '../styles/NavBar.module.scss';
 import {NavLink} from "react-router-dom";
 import {Button, Menu} from "antd";
-import {logout} from "../../redux/authReducer";
 import {MenuOutlined, ShoppingCartOutlined, UploadOutlined} from "@ant-design/icons";
-import LeftSideNav from "./LeftSideNav/LeftSideNav";
+import {SideNav} from "./SideNav";
+import {logout} from "../redux/thunks/authThunks";
 
-function Header({history, authState, dispatch}: any) {
+export function NavBar({history, authState, dispatch}: any) {
     const [path, setPath] = useState('')
     const [nav, toggleNav] = useState(false)
 
@@ -55,9 +55,7 @@ function Header({history, authState, dispatch}: any) {
                 }
                 <Button icon={<MenuOutlined/>} className={style.leftSideNavBtn} onClick={() => toggleNav(true)}/>
             </div>
-            <LeftSideNav nav={nav} path={path} toggleNav={toggleNav} authState={authState} dispatch={dispatch}/>
+            <SideNav nav={nav} path={path} toggleNav={toggleNav} authState={authState} dispatch={dispatch}/>
         </header>
     )
 }
-
-export default memo(Header)

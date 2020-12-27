@@ -1,12 +1,12 @@
-import React, {FC, memo} from "react";
-import style from './Register.module.scss';
+import React, {FC} from "react";
+import style from '../styles/Register.module.scss';
 import {Button, Input, Spin} from "antd";
-import {register} from "../../redux/authReducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {registerType} from "../../api/auth";
 import {Redirect} from "react-router-dom";
+import {register} from "../redux/thunks/authThunks";
+import {registerType} from "../interfaces/authApiType";
 
-function Register ({authState, dispatch}: any) {
+export function Register ({authState, dispatch}: any) {
     const registerHandler = (payload: registerType) => {
         if (payload) {
             dispatch(register({...payload}))
@@ -43,5 +43,3 @@ const RegisterForm: FC<InjectedFormProps<registerType>> = ({handleSubmit}) => {
 }
 
 const LoginReduxForm = reduxForm<registerType>({form: "register"})(RegisterForm)
-
-export default memo(Register)

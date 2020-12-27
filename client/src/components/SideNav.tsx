@@ -1,8 +1,8 @@
-import React, {memo} from "react";
-import style from './LeftSideNav.module.scss';
+import React from "react";
+import style from '../styles/SideNav.module.scss';
 import {NavLink} from "react-router-dom";
 import {Button, Drawer, Menu} from "antd";
-import {logout} from "../../../redux/authReducer";
+import {logout} from "../redux/thunks/authThunks";
 import {
     CheckCircleOutlined,
     HistoryOutlined,
@@ -12,7 +12,7 @@ import {
     UploadOutlined
 } from "@ant-design/icons";
 
-function LeftSideNav({nav, path, toggleNav, authState, dispatch}: any) {
+export function SideNav({nav, path, toggleNav, authState, dispatch}: any) {
     return (
         <Drawer className={style.container} title={authState.user.name ? `Welcome, ${authState.user.name}` : 'Menu'}
                 onClose={() => toggleNav(false)} placement={"left"} closable={true} visible={nav}>
@@ -55,5 +55,3 @@ function LeftSideNav({nav, path, toggleNav, authState, dispatch}: any) {
         </Drawer>
     )
 }
-
-export default memo(LeftSideNav)

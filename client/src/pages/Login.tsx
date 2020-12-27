@@ -1,13 +1,13 @@
-import React, {memo} from "react";
-import style from './Login.module.scss';
+import React from "react";
+import style from '../styles/Login.module.scss';
 import {Button, Input, Spin} from "antd";
-import {login} from "../../redux/authReducer";
 import {Field, reduxForm} from "redux-form";
 import {Redirect} from "react-router-dom";
-import {loginType} from "../../api/auth";
 import {InjectedFormProps} from "redux-form/lib/reduxForm";
+import {login} from "../redux/thunks/authThunks";
+import {loginType} from "../interfaces/authApiType";
 
-function Login({authState, dispatch}: any) {
+export function Login({authState, dispatch}: any) {
     const loginHandler = (payload: loginType) => {
         if (payload) {
             dispatch(login({...payload}))
@@ -39,5 +39,3 @@ const LoginForm: React.FC<InjectedFormProps<loginType>> = ({handleSubmit}) => {
 }
 
 const LoginReduxForm = reduxForm<loginType>({form: "login"})(LoginForm)
-
-export default memo(Login)
