@@ -11,15 +11,13 @@ import {Preloader} from "./components/Preloader";
 import Upload from "./pages/Upload";
 import History from "./pages/History";
 import Cart from "./pages/Cart";
-import {useHistory} from 'react-router-dom';
 import {stateType} from "./interfaces/stateType";
 import {auth} from "./redux/thunks/authThunks";
 import {notificationError} from "./utils/notifications";
 
 export function App() {
-    const state = useSelector((state: stateType) => state)
+    const authState = useSelector((state: stateType) => state.auth)
     const dispatch = useDispatch()
-    const history = useHistory()
 
     useEffect(() => {
         dispatch(auth())
@@ -28,18 +26,18 @@ export function App() {
         })
     }, [dispatch])
 
-    if (!state.auth.isInitialized) return <Preloader/>
+    if (!authState.isInitialized) return <Preloader/>
 
     return (
         <div className={style.container}>
-            <Switch><NavBar history={history} authState={state.auth} dispatch={dispatch}/></Switch>
+            <NavBar/>
             <Switch>
-                <Route exact path={'/(|products)'} render={() => <Products isAuthorized={state.auth.isAuthorized}/>}/>
-                <Route path={'/upload'} render={() => <Upload isAuthorized={state.auth.isAuthorized}/>}/>
-                <Route path={'/cart'} render={() => <Cart isAuthorized={state.auth.isAuthorized}/>}/>
-                <Route path={'/history'} render={() => <History isAuthorized={state.auth.isAuthorized}/>}/>
-                <Route path={'/register'} render={() => <Register authState={state.auth} dispatch={dispatch}/>}/>
-                <Route path={'/login'} render={() => <Login authState={state.auth} dispatch={dispatch}/>}/>
+                <Route exact path={'/'} render={() => <Products/>}/>
+                <Route path={'/upload'} render={() => <Upload/>}/>
+                <Route path={'/cart'} render={() => <Cart/>}/>
+                <Route path={'/history'} render={() => <History/>}/>
+                <Route path={'/register'} render={() => <Register/>}/>
+                <Route path={'/login'} render={() => <Login/>}/>
                 <Route render={() => <Page404/>}/>
             </Switch>
         </div>

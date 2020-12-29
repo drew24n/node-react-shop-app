@@ -1,11 +1,7 @@
-import React, {ComponentType} from "react";
+import React from "react";
 import style from '../styles/History.module.scss';
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
-
-interface historyType {
-    isAuthorized: boolean
-}
 
 function History() {
     return (
@@ -13,4 +9,4 @@ function History() {
     )
 }
 
-export default compose<ComponentType<historyType>>(withAuthRedirect)(History)
+export default compose(withAuthRedirect)(History)

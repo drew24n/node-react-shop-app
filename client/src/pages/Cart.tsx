@@ -1,11 +1,7 @@
-import React, {ComponentType} from "react";
+import React from "react";
 import style from '../styles/Cart.module.scss';
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
-
-interface cartType {
-    isAuthorized: boolean
-}
 
 function Cart() {
     return (
@@ -13,4 +9,4 @@ function Cart() {
     )
 }
 
-export default compose<ComponentType<cartType>>(withAuthRedirect)(Cart)
+export default compose(withAuthRedirect)(Cart)

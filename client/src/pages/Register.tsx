@@ -5,8 +5,13 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Redirect} from "react-router-dom";
 import {register} from "../redux/thunks/authThunks";
 import {registerType} from "../interfaces/authApiType";
+import {useDispatch, useSelector} from "react-redux";
+import {stateType} from "../interfaces/stateType";
 
-export function Register ({authState, dispatch}: any) {
+export function Register () {
+    const authState = useSelector((state: stateType) => state.auth)
+    const dispatch = useDispatch()
+
     const registerHandler = (payload: registerType) => {
         if (payload) {
             dispatch(register({...payload}))

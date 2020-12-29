@@ -6,15 +6,20 @@ import {Redirect} from "react-router-dom";
 import {InjectedFormProps} from "redux-form/lib/reduxForm";
 import {login} from "../redux/thunks/authThunks";
 import {loginType} from "../interfaces/authApiType";
+import {useDispatch, useSelector} from "react-redux";
+import {stateType} from "../interfaces/stateType";
 
-export function Login({authState, dispatch}: any) {
+export function Login() {
+    const authState = useSelector((state: stateType) => state.auth)
+    const dispatch = useDispatch()
+
     const loginHandler = (payload: loginType) => {
         if (payload) {
             dispatch(login({...payload}))
         }
     }
 
-    if (authState.isAuthorized) return <Redirect to={'/products'}/>
+    if (authState.isAuthorized) return <Redirect exact to={'/'}/>
 
     return (
         <main className={style.container}>
