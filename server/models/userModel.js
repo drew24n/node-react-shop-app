@@ -17,7 +17,7 @@ const userSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        maxlength: [35, 'Email max length is 35 symbols'],
+        maxlength: [320, 'Email max length is 320 symbols'],
         trim: true,
         unique: [true, 'This email is already taken'],
         required: [true, 'Email is required']
