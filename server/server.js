@@ -5,7 +5,7 @@ const cors = require('cors')
 
 const {env: {MONGO_URI}} = require('./config')
 const PORT = process.env.PORT || 5000
-const whiteList = ['https://travel-catalog.netlify.app', 'http://localhost:3000']
+const whiteList = ['https://travel-catalog.netlify.app', 'http://localhost']
 
 const app = express()
 
